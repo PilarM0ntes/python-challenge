@@ -14,6 +14,7 @@ with open(bank_path, 'r') as bank_file:
     total_balance = 0 #Holds the total balance of all analyzed months
     prev_balance = 0 #Holds the previous balance value
     change = 0 #Holds the changes over the entire period
+    total_change = 0.0
     increase = [] #Holds the information of the greatest increase in profits
     decrease = [] ##Holds the information of the greatest decrease in profits
 
@@ -25,23 +26,24 @@ with open(bank_path, 'r') as bank_file:
         #Checks if this is the first value. If so, it initializes the arrays that will contain the values
         #that will be used for comparison & assigns the first balance value
         if month_counter == 0:
-            increase = [period, balance]
-            decrease = [period, balance]
+            increase = [period, 0]
+            decrease = [period, 0]
             prev_balance = balance
 
-        change = (prev_balance -balance) + change #calculates the change in balance vs the last balance value
         month_counter = month_counter + 1
         total_balance = total_balance + balance
+        change = (balance - prev_balance) #calculates the change in balance vs the last balance value
+        total_change = float(change) + total_change #adds all the changes in the entire period
         prev_balance = balance #Saves the current balance for the next change calculation
         
         #Verifies if the current balance is less than the greatest decrease value registered
-        if balance < decrease[1]:
-            decrease = [period, balance]
-        elif balance > increase[1]:
-            increase = [period, balance]
+        if change < decrease[1]:
+            decrease = [period, change]
+        elif change > increase[1]:
+            increase = [period, change]
 
 #Calculates the average changes of the time period & formats it to 2 decimals
-avg_chg = change/month_counter
+avg_chg = total_change/(month_counter-1)
 avg_chg ="{:.2f}".format(avg_chg)
 
 #Creates the final message
