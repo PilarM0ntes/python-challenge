@@ -24,8 +24,8 @@ The second part focuses on the calculations based on the retrieved data in each 
 - An if statement to initiliaze the variables for the first iteration
 - There is a counter to get the total of months included in the dataset: **month_counter**
 - **total_balance** adds all the values of the "Profit/Losses" column 
-- **change** calculates the change in balance versus the last balance value
-- An if statement to verify if the "Profit/Losses" value that is being analyzed is greater or less than the ones archived in two arrays: **increase** and **decrease**. These arrays include the date and profit/loss information.
+- **change** calculates the change in current Profit/Losses value versus the last Profit/Losses value
+- An if statement to verify if the "Profit/Losses" change value that is being analyzed is greater or less than the ones archived in two arrays: **increase** and **decrease**. These arrays include the date and profit/loss change information.
 - Finally the average change **avg_chg** is calculated with all the information collected from the file
 
 The third part is the displaying of the information:
